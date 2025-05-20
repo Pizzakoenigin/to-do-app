@@ -1,19 +1,21 @@
 import ToDo from "./To-Do.js";
 
 class Project {
-    constructor(title, description, dueDate, priority){
+    constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.toDos = [];
+        this.id = crypto.randomUUID()
+
     }
 
-    addToDo(title, description, dueDate, priority){
-    this.toDos.push(new ToDo(title, description, dueDate, priority))
+    addToDo(title, description, dueDate, priority) {
+        this.toDos.push(new ToDo(title, description, dueDate, priority))
 
-    // removeToDo
-}
+        // removeToDo
+    }
 }
 
 export default Project
