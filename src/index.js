@@ -18,6 +18,4 @@ secondProject.addToDo('Hauptcharakter beschreiben', 'balbala', new Date(2025, 6,
 
 myProjects.push(myToDos, secondProject)
 
-console.table(myProjects)
-
 ui.createProjects(myProjects)
