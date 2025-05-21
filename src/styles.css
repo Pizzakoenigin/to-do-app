@@ -4,6 +4,30 @@ body {
 
 .display-projects {
     display: flex;
+    gap: 3em;
 
 }
 
+.project {
+    border: 1px grey solid;
+    border-radius: 5px;
+    padding: 1em;
+
+    .project-todos {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+}
+
+.create-add-project-form {
+    border: 1px grey solid;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+.todo {
+    border: 1px grey solid;
+    border-radius: 5px;
+    padding: 1em;
+}
