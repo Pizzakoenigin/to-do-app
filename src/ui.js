@@ -14,6 +14,7 @@ export function addText(element, innerText) {
 
 export function createProjects(projects) {
     createDOMElement('body', 'div', 'projects-container', false);
+    createDOMElement('.projects-container', 'h1', 'heading', 'Projects')
     createDOMElement('.projects-container', 'div', 'display-projects', false)
     projects.forEach(project => {
         createProjectElement(project)
@@ -38,21 +39,17 @@ export function createProjectElement(project) {
     // document.querySelector(`.change-reading-status-button-${project.id}`).addEventListener("click", () => toggleReadingStatusproject(project.id))
     // console.log(project);
     project.toDos.forEach(todo => {
-
-
-        createToDoElement(todo)
+        createToDoElement(todo, project.id)
     })
 }
 
-export function createToDoElement(todo) {
-    console.log(todo);
-
-    // createDOMElement(`project-container-${project.id}`, 'div', 'todo-container', false);
-    // createDOMElement('.todo-container', 'h2', 'todo-title', todo.title);
-    // createDOMElement('.todo-container', 'p', 'todo-description', todo.description);
-    // createDOMElement('.todo-container', 'p', 'todo-due', todo.dueDate);
-    // createDOMElement('.todo-container', 'p', 'todo-priority', todo.priority)
-    // createDOMElement('.todo-container', 'button', `remove-todo-button-${id}`, 'Remove To Do');
+export function createToDoElement(todo, id) {
+    createDOMElement(`.project-container-${id}`, 'div', `todo-container-${id}`, false);
+    createDOMElement(`.todo-container-${id}`, 'h3', 'todo-title', todo.title);
+    createDOMElement(`.todo-container-${id}`, 'p', 'todo-description', todo.description);
+    // createDOMElement(`.todo-container-${id}`, 'p', 'todo-due', todo.dueDate);
+    // createDOMElement(`.todo-container-${id}`, 'p', 'todo-priority', todo.priority)
+    // createDOMElement(`.todo-container-${id}`, 'button', `remove-todo-button-${id}`, 'Remove To Do');
 
     // document.querySelector(`.remove-todo-button-${todo.id}`).addEventListener("click", () => removetodo(todo.id))
     // document.querySelector(`.change-reading-status-button-${todo.id}`).addEventListener("click", () => toggleReadingStatustodo(todo.id))
