@@ -1,3 +1,4 @@
+import "./styles.css"
 import ToDo from "./To-Do.js";
 import Project from "./project.js";
 import * as ui from "./ui.js"
