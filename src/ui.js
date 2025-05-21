@@ -1,3 +1,6 @@
+import Project from "./project.js";
+import { myProjects } from "./index.js";
+
 export function createDOMElement(parentElement, elementType, elementClass, innerText) {
     let elementName = document.createElement(elementType);
     elementName.classList.add(elementClass);
@@ -23,8 +26,46 @@ export function createProjects(projects) {
 
     createDOMElement('.projects-container', 'button', 'create-add-project-form', 'Add project')
     // document.querySelector(`.project-container-${project.id}`).classList.add('project');
-    document.querySelector('.create-add-project-form').addEventListener("click", createNewProjectForm(),
-    )
+    document.querySelector('.create-add-project-form').addEventListener("click", () => createNewProjectForm())
+}
+
+export function createNewProjectForm() {
+    document.querySelector('.display-projects').innerHTML = ''
+    document.querySelector('.create-add-project-form').remove()
+    createDOMElement('.projects-container', 'form', 'add-project-form', '')
+
+    createDOMElement('.add-project-form', 'label', 'add-project-title-label', 'Title')
+    document.querySelector('.add-project-title-label').htmlFor = 'project_title';
+    createDOMElement('.add-project-form', 'input', 'add-project-title-input', false)
+    document.querySelector('.add-project-title-input').id = 'project_title'
+
+    createDOMElement('.add-project-form', 'label', 'add-project-description-label', 'description')
+    document.querySelector('.add-project-description-label').htmlFor = 'project_description';
+    createDOMElement('.add-project-form', 'input', 'add-project-description-input', false)
+    document.querySelector('.add-project-description-input').id = 'project_description'
+
+    createDOMElement('.add-project-form', 'label', 'add-project-due-date-label', 'due-date')
+    document.querySelector('.add-project-due-date-label').htmlFor = 'project_due-date';
+    createDOMElement('.add-project-form', 'input', 'add-project-due-date-input', false)
+    document.querySelector('.add-project-due-date-input').id = 'project_due-date'
+    document.querySelector('.add-project-due-date-input').type = 'date'
+
+    createDOMElement('.add-project-form', 'label', 'add-project-priority-label', 'priority')
+    document.querySelector('.add-project-priority-label').htmlFor = 'project_priority';
+    createDOMElement('.add-project-form', 'input', 'add-project-priority-input', false)
+    document.querySelector('.add-project-priority-input').id = 'project_priority'
+
+    createDOMElement('.add-project-form', 'button', 'add-project', 'Add project')
+    // document.querySelector(`.project-container-${project.id}`).classList.add('project');
+    document.querySelector('.add-project').addEventListener("click", () => addProject(document.querySelector('.add-book-title-input').value))
+}
+
+export function addProject(name, description, dueDate, priority) {
+    event.preventDefault()
+    name = new Project(name, description, dueDate, priority)
+    myProjects.push(name)
+    document.querySelector('.projects-container').innerHTML = ''
+    createProjects()
 }
 
 export function createProjectElement(project) {
@@ -42,7 +83,7 @@ export function createProjectElement(project) {
     // console.log(project);
 
     createDOMElement(`.project-container-${project.id}`, 'div', `project-todos-${project.id}`, false)
-    document.querySelector(`.project-todos-${project.id}`).classList.add('project-todos');   
+    document.querySelector(`.project-todos-${project.id}`).classList.add('project-todos');
     project.toDos.forEach(todo => {
         createToDoElement(todo, project.id)
     })
@@ -63,6 +104,4 @@ export function createToDoElement(todo, id) {
 
 }
 
-export function createNewProjectForm(project) {
 
-}
