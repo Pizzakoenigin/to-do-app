@@ -82,15 +82,16 @@ export function createProjectElement(project) {
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-description', project.description);
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-due', project.dueDate);
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-priority', project.priority)
-    createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');
-
-    document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => removeProject(project.id))
 
     createDOMElement(`.project-container-${project.id}`, 'div', `project-todos-${project.id}`, false)
     document.querySelector(`.project-todos-${project.id}`).classList.add('project-todos');
     project.toDos.forEach(todo => {
         createToDoElement(todo, project.id)
     })
+
+    createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');    
+
+    document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => removeProject(project.id))
 }
 
 export function removeProject(id) {
@@ -105,8 +106,8 @@ export function createToDoElement(todo, id) {
     document.querySelector(`.todo-container-${todo.id}`).classList.add('todo');
     createDOMElement(`.todo-container-${todo.id}`, 'h3', 'todo-title', todo.title);
     createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-description', todo.description);
-    // createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-due', todo.dueDate);
-    // createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-priority', todo.priority)
+    createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-due', todo.dueDate);
+    createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-priority', todo.priority)
     // createDOMElement(`.todo-container-${todo.id}`, 'button', `remove-todo-button-${todo.id}`, 'Remove To Do');
 
     // document.querySelector(`.remove-todo-button-${todo.id}`).addEventListener("click", () => removetodo(todo.id))
