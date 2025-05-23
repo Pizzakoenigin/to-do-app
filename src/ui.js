@@ -63,6 +63,8 @@ export function createNewProjectForm() {
         document.querySelector('.add-project-due-date-input').value,
         document.querySelector('.add-project-priority-input').value
     ))
+
+    
 }
 
 export function addProject(name, description, dueDate, priority) {
@@ -80,18 +82,22 @@ export function createProjectElement(project) {
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-description', project.description);
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-due', project.dueDate);
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-priority', project.priority)
-    // createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');
-    // createDOMElement(`.project-container-${project.id}`, 'button', `change-reading-status-button-${project.id}`, 'Toggle reading status')
+    createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');
 
-    // document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => removeProject(project.id))
-    // document.querySelector(`.change-reading-status-button-${project.id}`).addEventListener("click", () => toggleReadingStatusproject(project.id))
-    // console.log(project);
+    document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => removeProject(project.id))
 
     createDOMElement(`.project-container-${project.id}`, 'div', `project-todos-${project.id}`, false)
     document.querySelector(`.project-todos-${project.id}`).classList.add('project-todos');
     project.toDos.forEach(todo => {
         createToDoElement(todo, project.id)
     })
+}
+
+export function removeProject(id) {
+    let findID = myProjects.findIndex((project) => project.id == id)
+    myProjects.splice(findID, 1)
+    document.querySelector('.projects-container').innerHTML = ''
+    createProjects(myProjects)
 }
 
 export function createToDoElement(todo, id) {
