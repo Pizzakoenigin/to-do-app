@@ -101,19 +101,21 @@ export function removeProject(id) {
     createProjects(myProjects)
 }
 
-export function createToDoElement(todo, id) {
-    createDOMElement(`.project-todos-${id}`, 'div', `todo-container-${todo.id}`, false);
+export function createToDoElement(todo, projectId) {
+    createDOMElement(`.project-todos-${projectId}`, 'div', `todo-container-${todo.id}`, false);
     document.querySelector(`.todo-container-${todo.id}`).classList.add('todo');
     createDOMElement(`.todo-container-${todo.id}`, 'h3', 'todo-title', todo.title);
     createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-description', todo.description);
     createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-due', todo.dueDate);
     createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-priority', todo.priority)
-    // createDOMElement(`.todo-container-${todo.id}`, 'button', `remove-todo-button-${todo.id}`, 'Remove To Do');
-
-    // document.querySelector(`.remove-todo-button-${todo.id}`).addEventListener("click", () => removetodo(todo.id))
-    // document.querySelector(`.change-reading-status-button-${todo.id}`).addEventListener("click", () => toggleReadingStatustodo(todo.id))
-
-
+    createDOMElement(`.todo-container-${todo.id}`, 'button', `remove-todo-button-${todo.id}`, 'Remove To Do');
+    document.querySelector(`.remove-todo-button-${todo.id}`).addEventListener("click", () => removeToDo(todo.id, projectId))
 }
 
-
+export function removeToDo(toDoId, projectId) {
+    let findIDProject = myProjects.findIndex((project) => project.id == projectId);
+    let findToDoId = myProjects[findIDProject].toDos.findIndex((todo) => todo.id == toDoId);
+    myProjects[findIDProject].toDos.splice(findToDoId, 1);
+    document.querySelector('.projects-container').innerHTML = ''
+    createProjects(myProjects)
+}
