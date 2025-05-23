@@ -1,19 +1,7 @@
 import Project from "./project.js";
 import { myProjects } from "./index.js";
-
-export function createDOMElement(parentElement, elementType, elementClass, innerText) {
-    let elementName = document.createElement(elementType);
-    elementName.classList.add(elementClass);
-    if (innerText) {
-        elementName.textContent = `${innerText}`
-    }
-    document.querySelector(parentElement).appendChild(elementName)
-
-}
-
-export function addText(element, innerText) {
-    document.querySelector(`${element}`).textContent = `${innerText}`
-}
+import { createNewProjectForm } from "./projectForm.js";
+import { createDOMElement, addText } from "./factories.js";
 
 export function createProjects(projects) {
     createDOMElement('body', 'div', 'projects-container', false);
@@ -29,51 +17,6 @@ export function createProjects(projects) {
     document.querySelector('.create-add-project-form').addEventListener("click", () => createNewProjectForm())
 }
 
-export function createNewProjectForm() {
-    document.querySelector('.display-projects').innerHTML = ''
-    document.querySelector('.create-add-project-form').remove()
-    createDOMElement('.projects-container', 'form', 'add-project-form', '')
-
-    createDOMElement('.add-project-form', 'label', 'add-project-title-label', 'Title')
-    document.querySelector('.add-project-title-label').htmlFor = 'project_title';
-    createDOMElement('.add-project-form', 'input', 'add-project-title-input', false)
-    document.querySelector('.add-project-title-input').id = 'project_title'
-
-    createDOMElement('.add-project-form', 'label', 'add-project-description-label', 'description')
-    document.querySelector('.add-project-description-label').htmlFor = 'project_description';
-    createDOMElement('.add-project-form', 'input', 'add-project-description-input', false)
-    document.querySelector('.add-project-description-input').id = 'project_description'
-
-    createDOMElement('.add-project-form', 'label', 'add-project-due-date-label', 'due-date')
-    document.querySelector('.add-project-due-date-label').htmlFor = 'project_due-date';
-    createDOMElement('.add-project-form', 'input', 'add-project-due-date-input', false)
-    document.querySelector('.add-project-due-date-input').id = 'project_due-date'
-    document.querySelector('.add-project-due-date-input').type = 'date'
-
-    createDOMElement('.add-project-form', 'label', 'add-project-priority-label', 'priority')
-    document.querySelector('.add-project-priority-label').htmlFor = 'project_priority';
-    createDOMElement('.add-project-form', 'input', 'add-project-priority-input', false)
-    document.querySelector('.add-project-priority-input').id = 'project_priority'
-
-    createDOMElement('.add-project-form', 'button', 'add-project', 'Add project')
-    // document.querySelector(`.project-container-${project.id}`).classList.add('project');
-    document.querySelector('.add-project').addEventListener("click", () => addProject(
-        document.querySelector('.add-project-title-input').value, 
-        document.querySelector('.add-project-description-input').value, 
-        document.querySelector('.add-project-due-date-input').value,
-        document.querySelector('.add-project-priority-input').value
-    ))
-
-    
-}
-
-export function addProject(name, description, dueDate, priority) {
-    event.preventDefault()
-    let newProject = new Project(name, description, dueDate, priority)
-    myProjects.push(newProject)
-    document.querySelector('.projects-container').innerHTML = ''
-    createProjects(myProjects)
-}
 
 export function createProjectElement(project) {
     createDOMElement('.display-projects', 'div', `project-container-${project.id}`, false);
@@ -89,17 +32,17 @@ export function createProjectElement(project) {
         createToDoElement(todo, project.id)
     })
 
-    createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');    
+    createDOMElement(`.project-todos-${project.id}`, 'button', `add-to-do-button-${project.id}`, 'Add To Do')
+    createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');
 
     document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => removeProject(project.id))
+    document.querySelector(`.add-to-do-button-${project.id}`).addEventListener("click", () => addToDo(project.id))
 }
 
-export function removeProject(id) {
-    let findID = myProjects.findIndex((project) => project.id == id)
-    myProjects.splice(findID, 1)
-    document.querySelector('.projects-container').innerHTML = ''
-    createProjects(myProjects)
+export function addToDo(id) {
+    myProjects[id].addToDo()
 }
+
 
 export function createToDoElement(todo, projectId) {
     createDOMElement(`.project-todos-${projectId}`, 'div', `todo-container-${todo.id}`, false);
