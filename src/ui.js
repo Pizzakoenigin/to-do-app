@@ -57,15 +57,20 @@ export function createNewProjectForm() {
 
     createDOMElement('.add-project-form', 'button', 'add-project', 'Add project')
     // document.querySelector(`.project-container-${project.id}`).classList.add('project');
-    document.querySelector('.add-project').addEventListener("click", () => addProject(document.querySelector('.add-book-title-input').value))
+    document.querySelector('.add-project').addEventListener("click", () => addProject(
+        document.querySelector('.add-project-title-input').value, 
+        document.querySelector('.add-project-description-input').value, 
+        document.querySelector('.add-project-due-date-input').value,
+        document.querySelector('.add-project-priority-input').value
+    ))
 }
 
 export function addProject(name, description, dueDate, priority) {
     event.preventDefault()
-    name = new Project(name, description, dueDate, priority)
-    myProjects.push(name)
+    let newProject = new Project(name, description, dueDate, priority)
+    myProjects.push(newProject)
     document.querySelector('.projects-container').innerHTML = ''
-    createProjects()
+    createProjects(myProjects)
 }
 
 export function createProjectElement(project) {
