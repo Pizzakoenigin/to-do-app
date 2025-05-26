@@ -1,8 +1,6 @@
 import { createDOMElement, addText } from "./factories.js";
 import { addProject } from "./projectActions.js";
 
-
-
 export function createNewProjectForm() {
     document.querySelector('.display-projects').innerHTML = ''
     document.querySelector('.create-add-project-form').remove()

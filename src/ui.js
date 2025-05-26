@@ -29,8 +29,11 @@ export function createProjectElement(project) {
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-due', project.dueDate);
     createDOMElement(`.project-container-${project.id}`, 'p', 'project-priority', project.priority)
 
+    createDOMElement(`.project-container-${project.id}`, 'p', 'project-head', 'To Dos:')
     createDOMElement(`.project-container-${project.id}`, 'div', `project-todos-${project.id}`, false)
+
     document.querySelector(`.project-todos-${project.id}`).classList.add('project-todos');
+
     project.toDos.forEach(todo => {
         createToDoElement(todo, project.id)
     })

@@ -4,9 +4,11 @@ import { myProjects } from "./index.js";
 import * as ui from "./ui.js"
 
 export function createNewToDoForm(id) {
+    
     document.querySelector('.display-projects').innerHTML = ''
     document.querySelector('.create-add-project-form').remove()
     createDOMElement('.projects-container', 'form', 'add-todo-form', '')
+    createDOMElement('.add-todo-form', 'h2', 'add-todo-head', 'Add To Do')
 
     createDOMElement('.add-todo-form', 'label', 'add-todo-title-label', 'Title')
     document.querySelector('.add-todo-title-label').htmlFor = 'todo_title';
