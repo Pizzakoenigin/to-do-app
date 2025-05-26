@@ -2,6 +2,8 @@ import Project from "./project.js";
 import { myProjects } from "./index.js";
 import { createNewProjectForm } from "./projectForm.js";
 import { createDOMElement, addText } from "./factories.js";
+import * as projectActions from "./projectActions.js"
+import * as toDoActions from "./toDoActions.js"
 
 export function createProjects(projects) {
     createDOMElement('body', 'div', 'projects-container', false);
@@ -35,13 +37,11 @@ export function createProjectElement(project) {
     createDOMElement(`.project-todos-${project.id}`, 'button', `add-to-do-button-${project.id}`, 'Add To Do')
     createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');
 
-    document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => removeProject(project.id))
-    document.querySelector(`.add-to-do-button-${project.id}`).addEventListener("click", () => addToDo(project.id))
+    document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => projectActions.removeProject(project.id))
+    document.querySelector(`.add-to-do-button-${project.id}`).addEventListener("click", () => toDoActions.addToDo(project.id))
 }
 
-export function addToDo(id) {
-    myProjects[id].addToDo()
-}
+
 
 
 export function createToDoElement(todo, projectId) {
@@ -52,13 +52,7 @@ export function createToDoElement(todo, projectId) {
     createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-due', todo.dueDate);
     createDOMElement(`.todo-container-${todo.id}`, 'p', 'todo-priority', todo.priority)
     createDOMElement(`.todo-container-${todo.id}`, 'button', `remove-todo-button-${todo.id}`, 'Remove To Do');
-    document.querySelector(`.remove-todo-button-${todo.id}`).addEventListener("click", () => removeToDo(todo.id, projectId))
+    document.querySelector(`.remove-todo-button-${todo.id}`).addEventListener("click", () => projectActions.removeToDo(todo.id, projectId))
 }
 
-export function removeToDo(toDoId, projectId) {
-    let findIDProject = myProjects.findIndex((project) => project.id == projectId);
-    let findToDoId = myProjects[findIDProject].toDos.findIndex((todo) => todo.id == toDoId);
-    myProjects[findIDProject].toDos.splice(findToDoId, 1);
-    document.querySelector('.projects-container').innerHTML = ''
-    createProjects(myProjects)
-}
+
