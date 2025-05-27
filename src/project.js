@@ -1,4 +1,5 @@
 import ToDo from "./To-Do.js";
+// import { myProjects } from "./index.js";
 
 class Project {
     constructor(title, description, dueDate, priority) {
@@ -13,7 +14,6 @@ class Project {
 
     addToDo(title, description, dueDate, priority) {
         this.toDos.push(new ToDo(title, description, dueDate, priority))
-
     }
 
     // removeToDo() {

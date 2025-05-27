@@ -4,11 +4,12 @@ import { myProjects } from "./index.js";
 import * as ui from "./ui.js"
 
 export function createNewToDoForm(id) {
+    let findIDProject = myProjects.findIndex((project) => project.id == id);
     
     document.querySelector('.display-projects').innerHTML = ''
     document.querySelector('.create-add-project-form').remove()
     createDOMElement('.projects-container', 'form', 'add-todo-form', '')
-    createDOMElement('.add-todo-form', 'h2', 'add-todo-head', 'Add To Do')
+    createDOMElement('.add-todo-form', 'h2', 'add-todo-head', `add a To Do to the project ${myProjects[findIDProject].title}`)
 
     createDOMElement('.add-todo-form', 'label', 'add-todo-title-label', 'Title')
     document.querySelector('.add-todo-title-label').htmlFor = 'todo_title';
@@ -34,16 +35,17 @@ export function createNewToDoForm(id) {
     createDOMElement('.add-todo-form', 'button', 'add-todo', 'Add todo')
     // document.querySelector(`.todo-container-${todo.id}`).classList.add('todo');
 
-    let findIDProject = myProjects.findIndex((project) => project.id == id);
-
     document.querySelector('.add-todo').addEventListener("click", () => {
         event.preventDefault();
+        // console.log(myProjects[findIDProject].addToDo);
+        
         myProjects[findIDProject].addToDo(
             document.querySelector('.add-todo-title-input').value,
             document.querySelector('.add-todo-description-input').value,
             document.querySelector('.add-todo-due-date-input').value,
             document.querySelector('.add-todo-priority-input').value
         );
+            // localStorage.setItem('projects', JSON.stringify(myProjects))
             document.querySelector('.projects-container').innerHTML = ''
             ui.createProjects(myProjects)
     }

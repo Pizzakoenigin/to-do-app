@@ -8,7 +8,7 @@ import * as toDoActions from "./toDoActions.js"
 
 export function createProjects(projects) {
     createDOMElement('body', 'div', 'projects-container', false);
-    createDOMElement('.projects-container', 'h1', 'heading', 'Projects')
+    createDOMElement('.projects-container', 'h1', 'heading', 'my projects and to dos')
     createDOMElement('.projects-container', 'div', 'display-projects', false)
     projects.forEach(project => {
         createProjectElement(project)
