@@ -1,6 +1,7 @@
 import { createDOMElement, addText } from "./factories.js";
-import { addToDo } from "./toDoActions.js";
+import { addToDo } from "./projectActions.js";
 import { myProjects } from "./index.js";
+
 import * as ui from "./ui.js"
 
 export function createNewToDoForm(id) {
@@ -39,7 +40,8 @@ export function createNewToDoForm(id) {
         event.preventDefault();
         // console.log(myProjects[findIDProject].addToDo);
         
-        myProjects[findIDProject].addToDo(
+        addToDo(
+            findIDProject,
             document.querySelector('.add-todo-title-input').value,
             document.querySelector('.add-todo-description-input').value,
             document.querySelector('.add-todo-due-date-input').value,
