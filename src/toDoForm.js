@@ -38,7 +38,6 @@ export function createNewToDoForm(id) {
 
     document.querySelector('.add-todo').addEventListener("click", () => {
         event.preventDefault();
-        // console.log(myProjects[findIDProject].addToDo);
         
         addToDo(
             findIDProject,

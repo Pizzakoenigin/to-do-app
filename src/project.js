@@ -12,9 +12,9 @@ class Project {
 
     }
 
-    addToDo(title, description, dueDate, priority) {
-        this.toDos.push(new ToDo(title, description, dueDate, priority))
-    }
+    // addToDo(title, description, dueDate, priority) {
+    //     this.toDos.push(new ToDo(title, description, dueDate, priority))
+    // }
 
     // removeToDo() {
     //     this.toDos.splice(findToDoId, 1)

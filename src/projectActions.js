@@ -21,8 +21,6 @@ export function removeProject(id) {
 }
 
 export function addToDo(projectId, title, description, dueDate, priority) {
-    // let findIDProject = myProjects.findIndex((project) => project.id == projectId);
-    // let findToDoId = myProjects[findIDProject].toDos.findIndex((todo) => todo.id == toDoId);
     let newToDo = new ToDo(title, description, dueDate, priority)
     myProjects[projectId].toDos.push(newToDo);
     localStorage.setItem('projects', JSON.stringify(myProjects))

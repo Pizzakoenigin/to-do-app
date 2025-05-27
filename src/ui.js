@@ -1,6 +1,7 @@
 import Project from "./project.js";
 import { myProjects } from "./index.js";
 import { createNewProjectForm } from "./projectForm.js";
+import { createUpdateProjectForm } from "./projectUpdateForm.js";
 import { createNewToDoForm } from "./toDoForm.js";
 import { createDOMElement, addText } from "./factories.js";
 import * as projectActions from "./projectActions.js"
@@ -40,9 +41,11 @@ export function createProjectElement(project) {
 
     createDOMElement(`.project-todos-${project.id}`, 'button', `add-to-do-button-${project.id}`, 'Add To Do')
     createDOMElement(`.project-container-${project.id}`, 'button', `remove-project-button-${project.id}`, 'Remove project');
+    createDOMElement(`.project-container-${project.id}`, 'button', `edit-project-button-${project.id}`, `Update project`)
 
     document.querySelector(`.remove-project-button-${project.id}`).addEventListener("click", () => projectActions.removeProject(project.id))
     document.querySelector(`.add-to-do-button-${project.id}`).addEventListener("click", () => createNewToDoForm(project.id))
+    document.querySelector(`.edit-project-button-${project.id}`).addEventListener("click", () => createUpdateProjectForm(project))
 }
 
 export function createToDoElement(todo, projectId) {
