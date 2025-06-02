@@ -7,9 +7,7 @@ export function addProject(title, description, dueDate, priority) {
     event.preventDefault()
     let newProject = new Project(title, description, dueDate, priority)
     myProjects.push(newProject)
-    localStorage.setItem('projects', JSON.stringify(myProjects))
-    document.querySelector('.projects-container').innerHTML = ''
-    ui.createProjects(myProjects)
+    refreshUI()
 }
 
 export function updateProject(index, title, description, dueDate, priority) {
@@ -17,35 +15,30 @@ export function updateProject(index, title, description, dueDate, priority) {
     myProjects[index].description = description;
     myProjects[index].dueDate = dueDate;
     myProjects[index].priority = priority;
-
-    localStorage.setItem('projects', JSON.stringify(myProjects))
-    document.querySelector('.projects-container').innerHTML = ''
-    ui.createProjects(myProjects)
+    refreshUI()
 }
 
 export function removeProject(id) {
     let findID = myProjects.findIndex((project) => project.id == id)
     myProjects.splice(findID, 1)
-    localStorage.setItem('projects', JSON.stringify(myProjects))
-    document.querySelector('.projects-container').innerHTML = ''
-    ui.createProjects(myProjects)
+    refreshUI()
 }
 
 export function addToDo(projectIndex, title, description, dueDate, priority) {
     let newToDo = new ToDo(title, description, dueDate, priority)
     myProjects[projectIndex].toDos.push(newToDo);
-    localStorage.setItem('projects', JSON.stringify(myProjects))
-    document.querySelector('.projects-container').innerHTML = ''
-    ui.createProjects(myProjects)
+    refreshUI()
 }
-
-
 
 export function removeToDo(toDoId, projectIndex) {
     let findIDProject = myProjects.findIndex((project) => project.id == projectIndex);
     let findToDoId = myProjects[findIDProject].toDos.findIndex((todo) => todo.id == toDoId);
     myProjects[findIDProject].toDos.splice(findToDoId, 1);
+    refreshUI()
+}
+
+function refreshUI(){
     localStorage.setItem('projects', JSON.stringify(myProjects))
     document.querySelector('.projects-container').innerHTML = ''
-    ui.createProjects(myProjects)
+    ui.createProjects(myProjects)    
 }

@@ -12,9 +12,10 @@ class Project {
 
     }
 
-    // addToDo(title, description, dueDate, priority) {
-    //     this.toDos.push(new ToDo(title, description, dueDate, priority))
-    // }
+    //erfüllt die selbe funktion wie addToDo in projectActions. muss ich anders lösen
+    addToDo(title, description, dueDate, priority) {
+        this.toDos.push(new ToDo(title, description, dueDate, priority))
+    }
 
     // removeToDo() {
     //     this.toDos.splice(findToDoId, 1)

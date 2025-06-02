@@ -16,11 +16,11 @@ if ('projects' in localStorage) {
 
     myProjects.push(myToDos, secondProject)
 
-    // myToDos.addToDo('Wäsche', 'waschen', new Date(2025, 6, 6), 'high')
-    // myToDos.addToDo('Flur', 'saugen', new Date(2025, 5, 6), 'low')
+    myToDos.addToDo('Wäsche', 'waschen', new Date(2025, 6, 6), 'high')
+    myToDos.addToDo('Flur', 'saugen', new Date(2025, 5, 6), 'low')
 
-    // secondProject.addToDo('Text ausdenken', 'balbala', new Date(2025, 6, 6), 'medium')
-    // secondProject.addToDo('Hauptcharakter beschreiben', 'balbala', new Date(2025, 6, 6), 'medium')    
+    secondProject.addToDo('Text ausdenken', 'balbala', new Date(2025, 6, 6), 'medium')
+    secondProject.addToDo('Hauptcharakter beschreiben', 'balbala', new Date(2025, 6, 6), 'medium')    
     localStorage.setItem('projects', JSON.stringify(myProjects))
 }
 
