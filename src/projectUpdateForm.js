@@ -1,5 +1,5 @@
 import { createDOMElement, addText } from "./factories.js";
-import { addProject } from "./projectActions.js";
+import { addProject, updateProject } from "./projectActions.js";
 import { myProjects } from "./index.js";
 
 export function createUpdateProjectForm(project) {
@@ -34,13 +34,14 @@ export function createUpdateProjectForm(project) {
     document.querySelector('.update-project-priority-input').value = project.priority
     document.querySelector('.update-project-priority-input').id = 'project_priority'
 
-    let findID = myProjects.findIndex((projectToDelete) => projectToDelete.id == project.id)
-    myProjects.splice(findID, 1)
+    let index = myProjects.findIndex((projectToDelete) => projectToDelete.id == project.id)
+    // myProjects.splice(index, 1)
 
     // keep index of project in myProject Array
 
     createDOMElement('.update-project-form', 'button', 'update-project', 'update project')
-    document.querySelector('.update-project').addEventListener("click", () => addProject(
+    document.querySelector('.update-project').addEventListener("click", () => updateProject(
+        index,
         document.querySelector('.update-project-title-input').value,
         document.querySelector('.update-project-description-input').value,
         document.querySelector('.update-project-due-date-input').value,

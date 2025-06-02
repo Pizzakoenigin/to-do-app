@@ -12,6 +12,17 @@ export function addProject(title, description, dueDate, priority) {
     ui.createProjects(myProjects)
 }
 
+export function updateProject(index, title, description, dueDate, priority) {
+    myProjects[index].title = title;
+    myProjects[index].description = description;
+    myProjects[index].dueDate = dueDate;
+    myProjects[index].priority = priority;
+
+    localStorage.setItem('projects', JSON.stringify(myProjects))
+    document.querySelector('.projects-container').innerHTML = ''
+    ui.createProjects(myProjects)
+}
+
 export function removeProject(id) {
     let findID = myProjects.findIndex((project) => project.id == id)
     myProjects.splice(findID, 1)
@@ -20,16 +31,18 @@ export function removeProject(id) {
     ui.createProjects(myProjects)
 }
 
-export function addToDo(projectId, title, description, dueDate, priority) {
+export function addToDo(projectIndex, title, description, dueDate, priority) {
     let newToDo = new ToDo(title, description, dueDate, priority)
-    myProjects[projectId].toDos.push(newToDo);
+    myProjects[projectIndex].toDos.push(newToDo);
     localStorage.setItem('projects', JSON.stringify(myProjects))
     document.querySelector('.projects-container').innerHTML = ''
     ui.createProjects(myProjects)
 }
 
-export function removeToDo(toDoId, projectId) {
-    let findIDProject = myProjects.findIndex((project) => project.id == projectId);
+
+
+export function removeToDo(toDoId, projectIndex) {
+    let findIDProject = myProjects.findIndex((project) => project.id == projectIndex);
     let findToDoId = myProjects[findIDProject].toDos.findIndex((todo) => todo.id == toDoId);
     myProjects[findIDProject].toDos.splice(findToDoId, 1);
     localStorage.setItem('projects', JSON.stringify(myProjects))
